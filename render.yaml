@@ -5,8 +5,7 @@ services:
     plan: free
     region: ohio
     buildCommand: npm install
-    preDeployCommand: node src/migrate.js
-    startCommand: npm start
+    startCommand: node src/migrate.js && npm start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
