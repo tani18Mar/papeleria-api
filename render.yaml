@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: papeleria-api
+    runtime: node
+    plan: free
+    region: ohio
+    buildCommand: npm install
+    preDeployCommand: node src/migrate.js
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: papeleria-db
+          property: connectionString
+
+databases:
+  - name: papeleria-db
+    plan: free
+    region: ohio
+    databaseName: papeleria
+    user: papeleria
